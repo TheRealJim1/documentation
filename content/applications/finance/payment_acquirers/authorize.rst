@@ -115,6 +115,63 @@ order is canceled, you can click on *Void Transaction* to unlock the funds from 
 .. note::
    With other payment acquirers, you can manage the capture in their own interfaces, not from Odoo.
 
+Authorize.Net statement import
+==============================
+
+.. admonition:: Template
+
+   You can find the Excel template for the import here :ref:` iii `
+
+To import a statement, first log into your Authorize.Net account, and go to :menuselection:`Account
+--> Statements --> eCheck.Net Settlement Statement`. Second, a range of transactions must be
+defined. To do so, search for the first and last settlement batches of the desired range. These will
+be the exported transactions.
+
+.. example::
+   .. image:: authorize/authorize-settlement-batch.png
+      :align: center
+      :alt: Settlement batch of the an Authorize.Net statement
+
+   In this case, the first batch (01/01/2021) belongs to the settlement of the 31/12/2020, so the
+   **opening** settlement is from the 31/12/2020.
+
+Once the range defined, copy (CTRL/COMMAND + C) all lines within the range and paste them
+(CRTL/COMMAND + V) into the :guilabel:`Report 1 Download` tab of the Excel sheet.
+Next, go to :menuselection:`Transaction Search --> Search for a Transaction`, enter the range of
+settlement dates, and click :guilabel:`Search`.
+
+When the list is generated, click :guilabel:`Download to File`. In the pop-up window, select
+:guilabel:`Expanded Fields with CAVV Response/Comma Separated`, enable :guilabel:`Include Column
+Headings`, and finally click :guilabel:`Submit`. Open the text file, select :guilabel:`All`, copy
+the data and paste it into the :guilabel:`Report 2 Download` tab of the Excel sheet.
+
+Transit lines are automatically filled-in and updated in the :guilabel:`transit for report 1` and
+:guilabel:`transit for report 2` tabs of the Excel sheet. Make sure all entries are present, and if
+not, copy the **formula** from previous filled-in lines and paste it into the empty lines.
+
+.. important::
+   To get the same closing balance, do *not* remove any line from the Excel sheet.
+
+Import into Odoo
+----------------
+
+To import the data into Odoo, copy the data from the :guilabel:`transit report 2` tab and **paste
+special** only the **values** in the :guilabel:`Odoo Import to CSV` tab. Then, look for
+*blue*-highlighted cells in the :guilabel:`Odoo Import to CSV` tab. These are **chargeback** entries
+without any **reference** number. To fix this, go to :menuselection:`Authorize.Net --> Account -->
+Statements --> eCheck.Net Settlement Statement`, look for :guilabel:`Charge Transaction/Chargeback`,
+and click it. Copy the **invoice description**, paste it into the :guilabel:`Label` cell of the
+:guilabel:`Odoo Import to CSV` tab, and add "**Chargeback /**" before the description.
+
+.. note::
+   For **chargeback/returns** that are combined in the payouts, make sure to separate them into
+   multi-lines before the upload.
+
+.. example::
+   .. image:: authorize/authorize-chargeback-desc.png
+      :align: center
+      :alt: Charge back description
+
 .. seealso::
    - `Authorize.Net: Getting Started Guide
      <https://support.authorize.net/s/article/Authorize-Net-Getting-Started-Guide>`__
