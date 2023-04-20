@@ -1,31 +1,102 @@
 ===============
-Email Templates
+Email templates
 ===============
 
-We all know writing good emails is vital to get a high response rate, but you do not want to
-rewrite the same structure every time, do you? That is where email templates come in.
-Without the need to rewrite the entire email structure every time, you save time to focus on
-the content. Multiple templates also let you deliver the right message to the right audience,
-improving their overall experience with the company.
+Writing effective emails is vital to receive a high response rate, to make things easier email
+templates allow the user to send emails without having to compose or rewrite the same structure
+every time. Without the need to rewrite the entire email structure every time, time is saved.
+Multiple templates also let the user deliver the right message to the right audience, improving
+their overall experience with the company.
 
 .. note::
-   The email templates use QWeb. The composer allows you to edit emails in their final rendering,
-   making customizations more robust as you don’t have to edit code.
+   The email templates use QWeb or XML. The composer allows the user to edit emails in their final
+   rendering, making customizations more robust as the user doesn't have to edit code.
 
-Defining a default reply to on your mail template
-=================================================
+Editing email templates
+=======================
 
-Although the field *reply to* is available within the mail templates, **this field is only used
-for mass mailing** mode (this means when sending templates on what we call bulk emailing). You
-can send emails in bulk in almost every app that has a list view. Select the records you want
-and click on the action button. If you have an option to send an email, you will see a mail
-composer with possible values to define:
+Starting Odoo 15, the Powerbox feature was released. The Powerbox allows for the user to edit the
+format of the text, to add links or buttons, appointment options, and to add images to the email
+template. Additionally the XML/HTML code of the email template can be edited via the :guilabel:`</>`
+icon. Dynamic placeholders (referencing fields within Odoo) are only available in the subject line
+and to and from fields in Odoo 15.
 
-.. image:: email_template/composer-mass-mailing-quotations.png
+Powerbox feature
+----------------
+
+The Powerbox feature is a enriched texted editor with many different options to format the layout
+and text style or add XML/HTML features in an email template. The Powerbox is activated by typing a
+forward slash `/` in the body of the email template.
+
+The following options will be available once the Powerbox is activated:
+
+**Basic Blocks**
+
+- Three different heading types
+- A text paragraph block
+- A bulleted list
+- A numbered list
+- A checklist
+- A table
+- The ability to switch the direction of the text
+- A horizontal separator
+- A quote
+- Add code to the text
+- Add a specific appointment
+- Schedule an appointment
+
+**Navigation**
+
+- Link
+- Button
+
+**Media**
+
+- Image
+
+To activate one of these options simply click on the option in the Powerbox. If it is a text option
+then highlight the text first and type in the activator key `/` and select the option.
+
+.. image:: email_template/powerbox-feature.png
+   :align: center
+   :alt: Powerbox feature in the email template.
+
+Editing via XML/HTML code
+-------------------------
+
+To access the XML/HTML editor for the email template click on the :guilabel:`</>` icon in the upper
+right hand corner of the template. The icon will appear in turquoise.
+
+.. image:: email_template/html-code-editor.png
+   :align: center
+   :alt: HTML editor in the email template.
+
+Dynamic placeholders
+--------------------
+
+Dynamic placeholders are encoded to display fields from within the database. Dynamic placeholders
+can no longer be used in Odoo 15 except for in the subject line, and to and from fields. Although
+the generator is present as the last tab on the template, it will create placeholders for use only
+in the above mentioned fields. Dynamic placeholders may be inserted in the HTML code, but this task
+is out of the scope of Odoo Support.
+
+.. seealso::
+   :doc:`../../../../services/support/what_can_i_expect`
+
+Defining a default reply to on the mail template
+================================================
+
+Although the *reply to* field is available within the mail templates, **this field is only used
+for mass mailing** mode (this means when sending templates on bulk emailing). Emails
+can be sent in bulk in almost every application that has a list view. Select the records where the
+emails are to be sent and click on the :guilabel:`Action` button. If there is the option to send an
+email, a mail composer with possible values to define will appear.
+
+.. image:: email_template/composer-mass-mailing.png
    :align: center
    :alt: Composer in mass mailing mode after selecting multiple quotations.
 
-You can also define them by default on the template:
+They can also be defined by default on the template:
 
 .. image:: email_template/reply-to-template-sales.png
    :align: center
@@ -33,14 +104,15 @@ You can also define them by default on the template:
 
 Because of this, setting a value in this field is useless as the value defined will be totally
 ignored. The default *reply-to* value is the default catchall email address to ensure a
-communication between your customer and your Odoo database. For more information about the way
-the catchall works, please check :ref:`how to manage inbound messages <email_communication/inbound_messages>`.
+communication between the customer and the Odoo database. For more information about the way
+the catchall works, check :ref:`how to manage inbound messages
+<email_communication/inbound_messages>`.
 
 Transactional emails and corresponding URL for each company
 ===========================================================
 
 When using Odoo, multiple events trigger the sending of automated emails. These emails are known
-as transactional emails and sometimes contain links pointing to your Odoo database.
+as transactional emails and sometimes contain links pointing to the Odoo database.
 
 By default, links generated by the database use the dynamic web.base.url key defined in the system
 parameters. More information about this :ref:`parameter <domain-name/web-base-url>`.
@@ -48,9 +120,9 @@ parameters. More information about this :ref:`parameter <domain-name/web-base-ur
 If the website application isn't installed, the web.base.url key will always be the default
 parameter used to generate all the links.
 
-It’s important to know that this key can only have a single value, meaning that in a
-multi-website/company database environment, even if you have a specific domain name for each
-website, the links generated to share a document or within a transactional email might remain the
+It's important to know that this key can only have a single value, meaning that in a
+multi-website/company database environment, even there is a specific domain name for each
+website, the links generated to share a document or within a transactional email may remain the
 same, whatever the website/company related to the sending of the email/document.
 
 This is not always the case as some Odoo applications have a link established in the database with
@@ -64,35 +136,35 @@ website of the company.
    the same (the web.base.url key value), whatever the company it's shared from, this is a known
    limitation!
 
-On the other hand, sales orders made by a customer on one of your Odoo e-commerce websites have a
+On the other hand, sales orders made by a customer on one of the Odoo e-commerce websites have a
 link established with the website from which the order was made. As a result, the e-mail sent for
 the sales orders uses the domain name defined for the corresponding website to generate the links.
 
-For more information about how to configure your domains, we invite you to check :doc:`our domain name
-documentation </administration/maintain/domain_names>`.
+For more information about how to configure domains, check out :doc:`our domain name documentation
+</administration/maintain/domain_names>`.
 
 Updating translations within email templates
 --------------------------------------------
 
-Email templates are automatically translated. Changing the translations shouldn’t be necessary.
-However, if for a specific reason you’d like to change some of the translations, this can be done.
+Email templates are automatically translated. Changing the translations shouldn't be necessary.
+However, if for a specific reason that some of the translations need to be changed, it can be done.
 
-Like any modification in the code, keep in mind that modifications that aren’t done correctly (for
-example modifications leading to bad syntax) can break the template, as a result, the template
+Like any modification in the code, keep in mind that modifications that aren't done correctly (for
+example modifications leading to bad syntax) can break the template, and as a result, the template
 will appear blank.
 
-In order to edit your translations, follow these steps from the template.
+In order to edit the translations, follow these steps from the template:
 
 #. Click on the edit button, then on the language button
 
    .. image:: email_template/edit-language-template.png
-      :align: left
-      :alt: Edit the language of a template
+      :align: center
+      :alt: Edit the language of a template.
 
 #. A pop-up window with the different languages installed on the database will be displayed. From
-   here, editing the translations will be possible. Don't forget to hit the save button to preserve
-   your changes.
+   here, editing the translations will be possible. Don't forget to hit the save button to save
+   the changes.
 
    .. image:: email_template/translation-body.png
-      :align: left
-      :alt: Translation of the body of the Application template in the different languages installed.
+      :align: center
+      :alt: Translation of the body of the Appointment Booked template.
