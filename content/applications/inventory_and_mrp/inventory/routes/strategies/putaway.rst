@@ -60,7 +60,9 @@ After configuring the putaway rules for apples and carrots, see the internal sto
 first buying products from a vendor using a :ref:`purchase order<inventory/purchase/vendor bills>`.
 
 In the :guilabel:`Purchase` app, create a :guilabel:`Request for Quotation` in the top of the menu,
-add the products, and select :guilabel:`Confirm` to send the order to the vendor.
+Then, add products to the :abbr:`RFQ (Request for Quotation)` by clicking :guilabel:`Add a line`, and selecting the desired product(s) from the drop-down menu in the :guilabel:`Product` column.
+
+Once ready, click :guilabel:`Confirm`. Doing so turns the :abbr:`RFQ (Request for Quotation)` into a Purchase Order (PO). Next, click :guilabel:`Send by Email` to send the :guilabel:`PO (Purchase Order) to the vendor if needed.
 
 .. image:: putaway/purchase-apples-and-carrots.png
    :align: center
